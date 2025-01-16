@@ -47,7 +47,7 @@ public class TestGiocoSedie {
         try {
             //1) apro il file
             br = new BufferedWriter(
-                    new FileWriter(nomeFile));
+                    new FileWriter(nomeFile, true));
             //2) scrivo nel buffer
             br.write("File in output");
             br.write("\n\r");
