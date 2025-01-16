@@ -54,7 +54,7 @@ public class TestGiocoSedie {
             //3) svuoto il buffer e salvo nel file i dati
             br.flush();         
         } catch (IOException ex) {
-            System.err.println("Stampa l'id della classe");
+            Logger.getLogger("Stampa l'id della classe");
         }
         finally{
             if (br!=null)
