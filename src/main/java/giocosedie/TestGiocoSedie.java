@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class TestGiocoSedie {
     private final static int NUMSEDIE = 15;
     private static Logger logger = Logger.getLogger("GiocoSedie.TestGiocoSedie");
-    String nomeFile= "Veschini_file.txt";
+    String nomeFile= "Persichetti_file.txt";
 
     /**
      * @param args the command line arguments
