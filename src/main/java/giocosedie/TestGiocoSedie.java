@@ -18,42 +18,48 @@ import java.util.logging.Logger;
 import java.util.Scanner;
 
 public class TestGiocoSedie {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Inserisci il numero di partecipanti: ");
-        int numPartecipanti = scanner.nextInt();
+    private final static int NUMSEDIE = 15;
+    private static Logger logger = Logger.getLogger("GiocoSedie.TestGiocoSedie");
+    String nomeFile= "Veschini_file.txt";
 
-        Posto sedie[] = new Posto[numPartecipanti - 1];
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Posto sedie[] = new Posto[NUMSEDIE];
 
         for (int k = 0; k < sedie.length; k++)
-            sedie[k] = new Posto();
+                sedie[k] = new Posto();
 
         Display display = new Display(sedie);
+        //System.out.println("Sto facendo partire il Display.");
+        logger.info("Sto facendo partire il Display.\n");
         display.start();
 
-        Partecipante array[] = new Partecipante[numPartecipanti];
-        for (int i = 0; i < numPartecipanti; i++) {
-            array[i] = new Partecipante(sedie);
-            array[i].start();
+        Partecipante array[] = new Partecipante[NUMSEDIE+1];
+        for (int i = 0; i < NUMSEDIE + 1; i++) {
+                array[i] = new Partecipante(sedie);
+                //System.out.println("Sto facendo partire il thread n." + array[i].getId());
+                logger.info("Sto facendo partire il thread id: " + array[i].getId()+" name: "+array[i].getName()+"\n");
+                array[i].start();
+                }
         }
-        scanner.close();
-    }
-}
 
-        public void scrivi(){
+    public void scrivi(){
         BufferedWriter br=null;
-        
+
         try {
             //1) apro il file
             br = new BufferedWriter(
-                    new FileWriter(nomeFile, true));
+                    new FileWriter(nomeFile));
             //2) scrivo nel buffer
             br.write("File in output");
             br.write("\n\r");
             //3) svuoto il buffer e salvo nel file i dati
             br.flush();         
         } catch (IOException ex) {
-            Logger.getLogger("Stampa l'id della classe");
+            //Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("Stampa l'ID");
         }
         finally{
             if (br!=null)
@@ -61,9 +67,39 @@ public class TestGiocoSedie {
                     //4)chiudo lo stream in uscita
                     br.close();
             } catch (IOException ex) {
-                System.err.println("Stampa l'id della classe");
+                //Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
+                        System.err.println("Stampa");
             }
 
-    }
         }
+    }
+
+    public void scrivi(String messaggio, boolean append){
+        BufferedWriter br=null;
+
+        try {
+            //1) apro il file
+            br = new BufferedWriter(
+                    new FileWriter(nomeFile,append));
+            //2) scrivo nel buffer
+            br.write(messaggio);
+            br.write("\n\r");
+            //3) svuoto il buffer e salvo nel file i dati
+            br.flush();         
+        } catch (IOException ex) {
+            //Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println(ex.getMessage());
+        }
+        finally{
+            if (br!=null)
+                try {
+                    //4)chiudo lo stream in uscita
+                    br.close();
+            } catch (IOException ex) {
+                //Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
+                        System.err.println(ex.getMessage());
+            }
+
+        }
+    }
 }
