@@ -11,9 +11,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Studente
+ * @author LP
  */
-import java.util.logging.Logger;
 
 import java.util.Scanner;
 
